@@ -1,10 +1,13 @@
 import { useContext, useState } from "react";
 import { usersContext } from "../contexts/Users";
 import { useNavigate } from "react-router-dom";
+import { friendsContext } from "../contexts/Friends";
 
 const Profil = () => {
   const [hover, setHover] = useState("user");
   const { user } = useContext(usersContext);
+  const { friends } = useContext(friendsContext);
+//   console.log(friends);
   const navigate = useNavigate();
 
   if (user === null) {
