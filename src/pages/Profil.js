@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { usersContext } from "../contexts/Users";
 import { useNavigate } from "react-router-dom";
 import { friendsContext } from "../contexts/Friends";
@@ -6,8 +6,16 @@ import { friendsContext } from "../contexts/Friends";
 const Profil = () => {
   const [hover, setHover] = useState("user");
   const { user } = useContext(usersContext);
-  const { friends } = useContext(friendsContext);
-//   console.log(friends);
+  const { friends, setFriends } = useContext(friendsContext);
+  //   console.log(friends);
+  //   if (friends.length === 0) {
+  //     console.log("ok");
+  //   }
+
+  useEffect(() => {
+    handleFriendsClick();
+  }, []);
+  const isFriendExists = friends.length === 0;
   const navigate = useNavigate();
 
   if (user === null) {
@@ -17,6 +25,16 @@ const Profil = () => {
   const handleMouseEnter = (hover) => {
     setHover(hover);
   };
+
+  const handleFriendsClick = async () => {
+    const randomingUser = Math.floor(Math.random() * 3 + 1);
+    const request = await fetch(
+      `https://randomuser.me/api/?results=${randomingUser}`
+    );
+    const response = await request.json();
+    setFriends(response);
+  };
+  console.log(friends);
   return (
     <main>
       <section className="card">
@@ -97,6 +115,8 @@ const Profil = () => {
             </>
           );
         })}
+
+        {isFriendExists && <button onClick={handleFriendsClick}>test</button>}
       </section>
     </main>
   );
