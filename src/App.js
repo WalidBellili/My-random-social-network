@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Profil from "./pages/Profil";
 import { UsersContextProvider } from "./contexts/Users";
+import "./App.css";
 
 const App = () => {
   return (

@@ -3,9 +3,11 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useContext } from "react";
 import { usersContext } from "../contexts/Users";
+import {  useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { user, setUser } = useContext(usersContext);
+  const { setUser } = useContext(usersContext);
+  const navigate = useNavigate();
   //   console.log(user);
   const formik = useFormik({
     initialValues: {
@@ -24,6 +26,7 @@ const Login = () => {
       const response = await request.json();
       console.log(response.results);
       setUser(response.results);
+      navigate("/profil");
     },
   });
   //   console.log(user);
