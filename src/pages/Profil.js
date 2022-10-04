@@ -1,9 +1,16 @@
 import { useContext, useState } from "react";
 import { usersContext } from "../contexts/Users";
+import { useNavigate } from "react-router-dom";
 
 const Profil = () => {
   const [hover, setHover] = useState("user");
   const { user } = useContext(usersContext);
+  const navigate = useNavigate();
+
+  if (user === null) {
+    navigate("/");
+  }
+
   const handleMouseEnter = (hover) => {
     setHover(hover);
   };
