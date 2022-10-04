@@ -10,7 +10,11 @@ const UsersContextProvider = (props) => {
     setUser: setUser,
   };
 
-  return <usersContext.Provider value={value}></usersContext.Provider>;
+  return (
+    <usersContext.Provider value={value}>
+      {props.children}
+    </usersContext.Provider>
+  );
 };
 
 export { UsersContextProvider, usersContext };
